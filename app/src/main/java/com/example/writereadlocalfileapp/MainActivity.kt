@@ -1,6 +1,7 @@
 package com.example.writereadlocalfileapp
 
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -20,6 +21,21 @@ class MainActivity : AppCompatActivity() {
         val text = mEditText!!.text.toString()
         var fos: FileOutputStream? = null
         try {
+            ////////////////////////////////////////////////
+            // Para escribir un archivo en carpeta Descargas (CUIDADO: No todos los dispositivos tienen
+            // permisos para hacerlo o bien tampoco dan la posibilidad de descargar en esta carpeta (Ej: Dispositivo Zebra))
+//            var baseFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
+//
+//            val string = "Contenido de archivo en carpeta Descargas"
+//            val file = File(baseFolder + File.separator.toString() + "archivo_descargas.txt")
+//            file.parentFile.mkdirs()
+//
+//            var fos2 = FileOutputStream(file)
+//            fos2.write(string.toByteArray())
+//            fos2.flush()
+//            fos2.close()
+            //////////////////////////////////////////////
+
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE)
             fos.write(text.toByteArray())
             mEditText!!.text.clear()
