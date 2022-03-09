@@ -18,7 +18,7 @@
         android:layout_below="@+id/edit_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:text="save"
+        android:text="Crear/Modificar archivo en carpeta INTERNA de la App"
         android:onClick="save"/>
 
     <Button
@@ -28,6 +28,26 @@
         android:layout_alignStart="@+id/button_save"
         android:layout_below="@+id/button_save"
         android:layout_marginTop="17dp"
-        android:text="load"
+        android:text="Cargar archivo de carpeta INTERNA de la App"
         android:onClick="load"/>
+
+    <Button
+        android:id="@+id/button_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button_load"
+        android:layout_below="@+id/button_load"
+        android:layout_marginTop="17dp"
+        android:text="Crear/Modificar archivo en carpeta Descargas"
+        android:onClick="download"/>
+
+    <Button
+        android:id="@+id/button_upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/button_download"
+        android:layout_below="@+id/button_download"
+        android:layout_marginTop="17dp"
+        android:text="Cargar archivo de carpeta Descargas"
+        android:onClick="upload"/>
 </RelativeLayout>
