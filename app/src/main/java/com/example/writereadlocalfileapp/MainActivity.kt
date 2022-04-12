@@ -12,6 +12,52 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.*
 
+/**
+ * Los primeros 2 metodos comentados son la explicación rápida de todos los casos
+ * que abarcan el ejercicio, y en la activity en sí tenemos el código propio de estos métodos:
+ *
+ * Case 1: User doesn't have permission
+ * Case 2: User has permission
+ *
+ * Case 3: User has never seen the permission Dialog
+ * Case 4: User has denied permission once but he din't clicked on "Never Show again" check box
+ * Case 5: User denied the permission and also clicked on the "Never Show again" check box.
+ * Case 6: User has allowed the permission
+ *
+ */
+//fun handlePermission() {
+//    if (ContextCompat.checkSelfPermission(this@MainActivity,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//        != PackageManager.PERMISSION_GRANTED) {
+//        // This is Case 1. Now we need to check further if permission was shown before or not
+//        if (ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//
+//            // This is Case 4.
+//        } else {
+//            // This is Case 3. Request for permission here
+//        }
+//    } else {
+//        // This is Case 2. You have permission now you can do anything related to it
+//    }
+//}
+//
+//fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>?, grantResults: IntArray) {
+//    if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//        // This is Case 2 (Permission is now granted)
+//    } else {
+//        // This is Case 1 again as Permission is not granted by user
+//
+//        //Now further we check if used denied permanently or not
+//        if (ActivityCompat.shouldShowRequestPermissionRationale(this@MainActivity,
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//            // case 4 User has denied permission but not permanently
+//        } else {
+//            // case 5. Permission denied permanently.
+//            // You can open Permission setting's page from here now.
+//        }
+//    }
+//}
 class MainActivity : AppCompatActivity() {
     var mEditText: EditText? = null
 
@@ -37,8 +83,8 @@ class MainActivity : AppCompatActivity() {
         if (!permissionGranted) {
             //Request permissions.The result of the permission requests are handled by a callback, onRequestPermissionsResult
             if ((ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                            || ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
+              || ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+              || ContextCompat.checkSelfPermission(this.applicationContext, Manifest.permission.MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
                 //Ask user to grant permissions. Result is handled in onRequestPermissionsResult()
                 ActivityCompat.requestPermissions(
                         this,
@@ -58,6 +104,20 @@ class MainActivity : AppCompatActivity() {
                 if (grantResults.isNotEmpty()
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     permissionGranted = true
+                } else {
+                    //Permission is not granted by user
+
+                    //Now further we check if used denied permanently or not
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                        Toast.makeText(this, "Reiniciar aplicación y permitir permisos", Toast.LENGTH_LONG).show()
+
+                    } else {
+                        //Permission denied permanently.
+                        Toast.makeText(this, "Error: Modificar permisos desde la configuración de la app", Toast.LENGTH_LONG).show()
+                        Thread.sleep(3000)
+                    }
+
                 }
             }
         }
