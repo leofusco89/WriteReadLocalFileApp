@@ -130,8 +130,7 @@ class MainActivity : AppCompatActivity() {
             fos = openFileOutput(FILE_NAME, MODE_PRIVATE)
             fos.write(text.toByteArray())
             mEditText!!.text.clear()
-            Toast.makeText(this, "Archivo guardado en " + filesDir + "/" + FILE_NAME,
-                    Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Archivo guardado en " + filesDir + "/" + FILE_NAME, Toast.LENGTH_LONG).show()
         } catch (e: FileNotFoundException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -213,7 +212,7 @@ class MainActivity : AppCompatActivity() {
             // Obtenemos path+file en carpeta Descargas
             var baseFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
             val fileString = baseFolder + File.separator.toString() + "archivo_descargas.txt"
-            val fis2 = FileInputStream(fileString)
+            fis2 = FileInputStream(fileString)
             val isr = InputStreamReader(fis2)
             val bufferedReader = BufferedReader(isr)
             val sb = java.lang.StringBuilder()
